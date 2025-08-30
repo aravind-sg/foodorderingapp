@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Order - Canteen Rider</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <div class="logo">Canteen Rider</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="order.html" class="active">Order</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>Your Current Order</h2>
+    <ul id="order-list" style="list-style:none; padding-left: 0;"></ul>
+    <p id="total-price" style="font-weight:700; margin-top: 10px;"></p>
+    <button class="btn" onclick="confirmOrder()">Confirm Order</button>
+    <p id="confirmation-msg" style="color: green; font-weight: 600; margin-top: 15px;"></p>
+  </div>
+
+  <footer>
+    © 2025 College Canteen Food Delivery System.
+  </footer>
+
+  <script>
+    function loadOrder() {
+      let order = JSON.parse(localStorage.getItem('canteenOrder') || '[]');
+      let listElem = document.getElementById('order-list');
+      listElem.innerHTML = '';
+      if (order.length === 0) {
+        listElem.innerHTML = '<li>No items in your order. Please add from <a href="menu.html">menu</a>.</li>';
+        document.getElementById('total-price').textContent = '';
+        return;
+      }
+      let total = 0;
+      order.forEach(({ item, price }, idx) => {
+        total += price;
+        let li = document.createElement('li');
+        li.textContent = `${item} - ₹${price}`;
+        li.style.marginBottom = '10px';
+        listElem.appendChild(li);
+      });
+      document.getElementById('total-price').textContent = 'Total: ₹' + total;
+    }
+
+    function confirmOrder() {
+      let order = JSON.parse(localStorage.getItem('canteenOrder') || '[]');
+      if (order.length === 0) {
+        alert("Your order is empty!");
+        return;
+      }
+      localStorage.removeItem('canteenOrder');
+      document.getElementById('confirmation-msg').textContent = "Order confirmed! Please be ready during your scheduled time.";
+      document.getElementById('order-list').innerHTML = '';
+      document.getElementById('total-price').textContent = '';
+    }
+
+    window.onload = loadOrder;
+  </script>
+</body>
+</html>
