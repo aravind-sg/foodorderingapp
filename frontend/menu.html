@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu - Canteen Rider Delivery</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <div class="logo">Canteen Rider</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html" class="active">Menu</a></li>
+      <li><a href="order.html">Order</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>Our Menu - Rider Recommended</h2>
+    <div class="grid-cards">
+      <div class="card">
+        <img src="images/veg-sandwich.jpg" alt="Veg Sandwich" />
+        <div class="card-content">
+          <h3>Veg Sandwich</h3>
+          <p>Tasty and healthy sandwich for quick bites.</p>
+          <button onclick="addToOrder('Veg Sandwich', 40)">Add to Order - ₹40</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/paneer-roll.jpg" alt="Paneer Roll" />
+        <div class="card-content">
+          <h3>Paneer Roll</h3>
+          <p>Spiced paneer roll made fresh.</p>
+          <button onclick="addToOrder('Paneer Roll', 60)">Add to Order - ₹60</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/cold-coffee.jpg" alt="Cold Coffee" />
+        <div class="card-content">
+          <h3>Cold Coffee</h3>
+          <p>Refreshing cold coffee to recharge.</p>
+          <button onclick="addToOrder('Cold Coffee', 30)">Add to Order - ₹30</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/chole-bhature.jpg" alt="Chole Bhature" />
+        <div class="card-content">
+          <h3>Chole Bhature</h3>
+          <p>Classic Indian breakfast favorite.</p>
+          <button onclick="addToOrder('Chole Bhature', 50)">Add to Order - ₹50</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/samosa.jpg" alt="Samosa" />
+        <div class="card-content">
+          <h3>Samosa (2 pcs)</h3>
+          <p>Crispy and spicy snack.</p>
+          <button onclick="addToOrder('Samosa', 20)">Add to Order - ₹20</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 College Canteen Food Delivery System.
+  </footer>
+
+  <script>
+    function addToOrder(item, price) {
+      let order = JSON.parse(localStorage.getItem('canteenOrder') || '[]');
+      order.push({ item, price });
+      localStorage.setItem('canteenOrder', JSON.stringify(order));
+      alert(item + " added to your order!");
+    }
+  </script>
+</body>
+</html>
